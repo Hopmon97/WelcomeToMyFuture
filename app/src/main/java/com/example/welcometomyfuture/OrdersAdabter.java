@@ -17,19 +17,19 @@ public class OrdersAdabter extends ArrayAdapter<String> {
 
     private final Activity context;
 
-    private final String[] pname;
+    private final String[] orderID;
     private final String[] price;
-    private final String[] quantity;
+    private final String[] dateOfOrder;
 
 
     Bitmap bitmap;
-    public OrdersAdabter(Activity context, String[] pname,String[]price, String[]quantity)
+    public OrdersAdabter(Activity context, String[] orderID,String[]price, String[] dateOfOrder)
     {
-        super(context, R.layout.orders_row,pname);
+        super(context, R.layout.orders_row,orderID);
         this.context=context;
-        this.pname=pname;
+        this.orderID=orderID;
         this.price = price;
-        this.quantity=quantity;
+        this.dateOfOrder=dateOfOrder;
 
     }
     @NonNull
@@ -49,9 +49,9 @@ public class OrdersAdabter extends ArrayAdapter<String> {
         {
             viewHolder=(ViewHolder)r.getTag();
         }
-        viewHolder.tvpname.setText(pname[position]);
+        viewHolder.tvid.setText(orderID[position]);
         viewHolder.tvprice.setText(price[position]);
-        viewHolder.tvQuan.setText(quantity[position]);
+        viewHolder.tvDate.setText(dateOfOrder[position]);
 
 
 
@@ -73,17 +73,16 @@ public class OrdersAdabter extends ArrayAdapter<String> {
     class  ViewHolder
     {
         public BreakIterator tvPrice;
-        TextView tvid, tvpname, tvprice, tvQuan;
+        TextView tvid, tvDate, tvprice;
 
 
         // ImageView ivw;
 
         ViewHolder(View v)
         {
-            tvid= v.findViewById(R.id.tvid);
-            tvpname= v.findViewById(R.id.tvpname);
-            tvprice= v.findViewById(R.id.tvprice);
-            tvQuan= v.findViewById(R.id.tvQuan);
+            tvid= v.findViewById(R.id.tvOrderID);
+            tvprice= v.findViewById(R.id.tvTotalPrice);
+            tvDate= v.findViewById(R.id.tvDateOfOrder);
 
 
             // ivw=(ImageView)v.findViewById(R.id.iv);

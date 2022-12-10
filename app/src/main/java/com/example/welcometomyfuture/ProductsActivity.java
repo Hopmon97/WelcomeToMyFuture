@@ -67,7 +67,11 @@ public class ProductsActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Bundle data = new Bundle();
                 data.putString("ID", code[position]);
-                //enna valeis oulla ta variables dame mesa sto bundle
+                data.putString("name", productName[position]);
+                data.putString("description", productDescription[position]);
+                data.putString("price", productPrice[position]);
+                data.putString("seller", productSeller[position]);
+                data.putString("image", image[position]);
 
                 Intent intent = new Intent(ProductsActivity.this, productDetails.class);
                 intent.putExtras(data);

@@ -1,17 +1,11 @@
 package com.example.welcometomyfuture;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     //BottomNavigationView bottom_navigation;
@@ -19,13 +13,11 @@ public class MainActivity extends AppCompatActivity {
 
     EditText pas, usr,typ;
 
-    public static String ip="192.168.0.12";
+    public static String ip="192.168.10.9";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
 
         usr = findViewById(R.id.etUsername);
         pas = findViewById(R.id.etPassword);

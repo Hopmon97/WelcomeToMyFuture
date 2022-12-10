@@ -80,11 +80,11 @@
         android:paddingLeft="5dp">
 
         <TextView
-            android:id="@+id/rateview"
+            android:id="@+id/tvTotal"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_marginRight="10dp"
-            android:text="Total Amount : INR 600"
+            android:text="Total Amount : "
             android:textColor="#ffff"
             android:textSize="18dp" />
 

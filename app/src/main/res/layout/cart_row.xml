@@ -15,7 +15,7 @@
         android:padding="15dp">
 
         <TextView
-            android:id="@+id/tvid"
+            android:id="@+id/orderID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -27,18 +27,18 @@
             android:id="@+id/tvpname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="40dp"
             android:layout_marginTop="5dp"
             android:text="TextView"
-            app:layout_constraintStart_toEndOf="@+id/tvid"
+            app:layout_constraintStart_toEndOf="@+id/orderID"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvprice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="70dp"
             android:layout_marginTop="5dp"
-            android:layout_marginStart="10dp"
             android:text="money"
             app:layout_constraintStart_toEndOf="@+id/tvpname"
             app:layout_constraintTop_toTopOf="parent" />
@@ -47,41 +47,11 @@
             android:id="@+id/tvQuan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="5dp"
-            android:layout_marginStart="10dp"
             android:text="posotita"
             app:layout_constraintStart_toEndOf="@+id/tvprice"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="21dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/delete" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="21dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="24dp"
-            app:layout_constraintEnd_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/decr" />
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="21dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="28dp"
-            app:layout_constraintEnd_toStartOf="@+id/imageView2"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/incr" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

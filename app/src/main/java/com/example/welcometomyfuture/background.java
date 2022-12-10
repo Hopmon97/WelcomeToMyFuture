@@ -76,6 +76,8 @@ public class background extends AsyncTask<String,Void,String> {
                 postalcode= jo.getString("postalcode");
                 phone= jo.getString("phone");
 
+                System.out.println("id " + customerID + "name " + customerName + "surname " + customerSurname );
+
 
                /* data.putString("customerID", customerID);
                 data.putString("customerName", customerName);

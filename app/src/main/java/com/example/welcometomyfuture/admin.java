@@ -1,29 +1,19 @@
 package com.example.welcometomyfuture;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Update;
-
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -36,7 +26,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.text.BreakIterator;
 
 public class admin extends AppCompatActivity {
     String urladdress = "http://" + MainActivity.ip + "/Android/customer.php";//rwta stelioooo
@@ -90,7 +79,7 @@ public class admin extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.nav_home:
-                        startActivity(new Intent(getApplicationContext(), ListActivity.class));
+                        startActivity(new Intent(getApplicationContext(), admin.class));
                         return true;
                     case R.id.nav_products:
                         startActivity(new Intent(getApplicationContext(), ProductsActivity.class));

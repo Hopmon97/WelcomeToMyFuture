@@ -80,7 +80,7 @@ public class CartAdabter extends ArrayAdapter<String> {
 
         ViewHolder(View v)
         {
-            tvid= v.findViewById(R.id.tvid);
+            tvid= v.findViewById(R.id.orderID);
             tvpname= v.findViewById(R.id.tvpname);
             tvprice= v.findViewById(R.id.tvprice);
             tvQuan= v.findViewById(R.id.tvQuan);

@@ -3,13 +3,17 @@ package com.example.welcometomyfuture;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -26,12 +30,14 @@ import java.nio.charset.StandardCharsets;
 
 public class productDetails extends AppCompatActivity {
 
-    String productID;
-    String price;
+    String productID, name, description, price, seller, image, quantity, new_price;
 
-    TextView tvID;
+    TextView tvID, tvName, tvDescription, tvPrice, tvSeller;
+    ImageView iv;
     EditText etQuantity;
     Button btnCart;
+
+    Bundle data = new Bundle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,20 +45,58 @@ public class productDetails extends AppCompatActivity {
         setContentView(R.layout.activity_product_details);
 
         tvID=findViewById(R.id.tvID);
-        btnCart=findViewById(R.id.btnAddtocart);
-        //men xiaseis ta findviewbyid
+        tvName=findViewById(R.id.tvName);
+        tvDescription=findViewById(R.id.tvDescription);
+        tvPrice=findViewById(R.id.tvPrice);
+        tvSeller=findViewById(R.id.tvSeller);
+        etQuantity=findViewById(R.id.etQuantity);
+        iv=findViewById(R.id.iv);
+        btnCart=findViewById(R.id.btnCart);
 
         Bundle data = getIntent().getExtras();
 
         productID=data.getString("ID");
+        name=data.getString("name");
+        description=data.getString("description");
+        price=data.getString("price");
+        seller=data.getString("seller");
+        image=data.getString("image");
 
         tvID.setText(productID);
+        tvName.setText(name);
+        tvDescription.setText(description);
+        tvPrice.setText(price);
+        tvSeller.setText(seller);
 
+        Picasso
+                .with(this)
+                .load(image)
+                .into(iv);
 
 
         btnCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(etQuantity.getText().toString().equals(""))
+                {
+                   quantity = "1";
+                }
+                else
+                {
+                    quantity = etQuantity.getText().toString();
+                }
+
+
+
+                System.out.println("price "+price);
+                System.out.println("quantity " +quantity);
+
+                new_price = Double.toString(Double.valueOf(price) * Double.valueOf(quantity));
+
+                System.out.println("total_price  " +new_price);
+
+
                 AddCart addCart = new AddCart(productDetails.this);
                 addCart.execute();
             }
@@ -82,6 +126,9 @@ public class productDetails extends AppCompatActivity {
 
             try {
                 if (result.equals("success")) {
+                    Intent intent = new Intent(productDetails.this, Cart.class);
+                    startActivity(intent);
+                    finish();
                     Toast.makeText(context, "Product has been added to the cart sucesfully", Toast.LENGTH_LONG).show();
                 }
                 else{
@@ -109,8 +156,9 @@ public class productDetails extends AppCompatActivity {
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(ops, StandardCharsets.UTF_8));
                 String data = URLEncoder.encode("customerID", "UTF-8") + "=" + URLEncoder.encode(background.customerID, "UTF-8")+ "&&" +
                         URLEncoder.encode("productID", "UTF-8") + "=" + URLEncoder.encode(productID, "UTF-8") + "&&" +
-                        URLEncoder.encode("price", "UTF-8") + "=" + URLEncoder.encode(price, "UTF-8") + "&&" +
-                        URLEncoder.encode("quantity", "UTF-8") + "=" + URLEncoder.encode(etQuantity.getText().toString(), "UTF-8");
+                        URLEncoder.encode("productName", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8") + "&&" +
+                        URLEncoder.encode("price", "UTF-8") + "=" + URLEncoder.encode(new_price, "UTF-8") + "&&" +
+                        URLEncoder.encode("quantity", "UTF-8") + "=" + URLEncoder.encode(quantity, "UTF-8");
 
 
 

@@ -1,15 +1,16 @@
 package com.example.welcometomyfuture;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -31,12 +32,9 @@ import java.nio.charset.StandardCharsets;
 public class OrdersActivity extends AppCompatActivity {
 
     String urladdress="http://"+MainActivity.ip +"/Android/get_order_for_user.php";
-    String[] pname;
+    String[] orderID;
     String[] price;
-    String[] quantity;
-
-
-
+    String[] date;
 
     ListView listView;
     BufferedInputStream is;
@@ -56,6 +54,14 @@ public class OrdersActivity extends AppCompatActivity {
 
         GetOrder getOrder = new GetOrder(OrdersActivity.this);
         getOrder.execute();
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(OrdersActivity.this, OrderDetails.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public class GetOrder extends AsyncTask<String,Void,String> {
@@ -79,23 +85,23 @@ public class OrdersActivity extends AppCompatActivity {
             {
                 JSONArray ja = new JSONArray(result);
                 JSONObject jo=null;
-                pname = new String[ja.length()];
+                orderID = new String[ja.length()];
                 price = new String[ja.length()];
-                quantity = new String[ja.length()];
+                date = new String[ja.length()];
 
                 // imagepath = new String[ja.length()];
 
                 for(int i=0;i<ja.length();i++)
                 {
                     jo=ja.getJSONObject(i);
-                    pname[i]=jo.getString("productID");
-                    quantity[i]=jo.getString("quantity");
-                    price[i]=jo.getString("price");
+                    orderID[i]=jo.getString("orderID");
+                    date[i]=jo.getString("dateOfOrder");
+                    price[i]=jo.getString("totalPrice");
 
                     //imagepath[i]=jo.getString("photo");
                 }
 
-                OrdersAdabter customLiseView=new OrdersAdabter(OrdersActivity.this, pname,price, quantity);
+                OrdersAdabter customLiseView=new OrdersAdabter(OrdersActivity.this, orderID,price, date);
                 listView.setAdapter(customLiseView);
             }
             catch (Exception ex)
@@ -150,70 +156,6 @@ public class OrdersActivity extends AppCompatActivity {
         }
     }
 
-    private void collectData()
-    {//connection
-        try
-        {
-            URL url = new URL(urladdress);
-            HttpURLConnection con=(HttpURLConnection)url.openConnection();
-            con.setRequestMethod("GET");
-            is=new BufferedInputStream(con.getInputStream());
 
-
-        }
-        catch(Exception ex)
-        {
-            ex.printStackTrace();
-        }
-        // content
-        try
-        {
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            StringBuilder sb = new StringBuilder();
-            while ((line=br.readLine())!=null)
-            {
-                sb.append(line+"\n");
-            }
-            is.close();
-            result = sb.toString();
-
-        }
-
-        catch(Exception ex)
-        {
-            ex.printStackTrace();
-        }
-        //JSON
-        try
-        {
-            JSONArray ja = new JSONArray(result);
-            JSONObject jo=null;
-            pname = new String[ja.length()];
-            price = new String[ja.length()];
-            quantity = new String[ja.length()];
-
-            // imagepath = new String[ja.length()];
-
-            for(int i=0;i<ja.length();i++)
-            {
-                jo=ja.getJSONObject(i);
-                pname[i]=jo.getString("productID");
-                quantity[i]=jo.getString("quantity");
-                price[i]=jo.getString("price");
-
-
-                //imagepath[i]=jo.getString("photo");
-
-            }
-
-
-
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
-
-    }
 
 }

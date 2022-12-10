@@ -1,15 +1,20 @@
 package com.example.welcometomyfuture;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -30,20 +35,22 @@ import java.nio.charset.StandardCharsets;
 
 public class Cart extends AppCompatActivity {
 
+    TextView tvTotal;
+
     String urladdress="http://"+MainActivity.ip +"/Android/get_cart_for_user.php";
     String[] pname;
     String[] price;
     String[] quantity;
-
-
-
-
+    String[] pID;
 
     ListView listView;
     BufferedInputStream is;
     String line= null;
     String result = null;
 
+    Double total_price = 0.0;
+
+    BottomNavigationView bottom_navigation2;
 
 
     @Override
@@ -53,11 +60,36 @@ public class Cart extends AppCompatActivity {
 
 
         listView= findViewById(R.id.recview);
+        tvTotal=findViewById(R.id.tvTotal);
 
         StrictMode.setThreadPolicy((new StrictMode.ThreadPolicy.Builder().permitNetwork().build()));
 
         GetCart getCart = new GetCart(Cart.this);
         getCart.execute();
+
+
+        bottom_navigation2 = findViewById(R.id.bottom_navigation);
+
+        bottom_navigation2.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.nav_home:
+                        startActivity(new Intent(getApplicationContext(), admin.class));
+                        return true;
+                    case R.id.nav_products:
+                        startActivity(new Intent(getApplicationContext(), ProductsActivity.class));
+                        return true;
+                    case R.id.nav_cart:
+                        startActivity(new Intent(getApplicationContext(), Cart.class));
+                        return true;
+                    case R.id.nav_order:
+                        startActivity(new Intent(getApplicationContext(), OrdersActivity.class));
+                        return true;
+                }
+                return false;
+            }
+        });
     }
 
     public class GetCart extends AsyncTask<String,Void,String> {
@@ -81,6 +113,7 @@ public class Cart extends AppCompatActivity {
             {
                 JSONArray ja = new JSONArray(result);
                 JSONObject jo=null;
+                pID = new String[ja.length()];
                 pname = new String[ja.length()];
                 price = new String[ja.length()];
                 quantity = new String[ja.length()];
@@ -90,12 +123,17 @@ public class Cart extends AppCompatActivity {
                 for(int i=0;i<ja.length();i++)
                 {
                     jo=ja.getJSONObject(i);
-                    pname[i]=jo.getString("productID");
+                    pID[i] = jo.getString("productID");
+                    pname[i]=jo.getString("productName");
                     quantity[i]=jo.getString("quantity");
                     price[i]=jo.getString("price");
 
+                    total_price+= Double.valueOf(price[i]);
+
                     //imagepath[i]=jo.getString("photo");
                 }
+
+                tvTotal.setText("Total Amount: " + total_price);
 
                 CartAdabter customLiseView=new CartAdabter(Cart.this, pname,price, quantity);
                 listView.setAdapter(customLiseView);
@@ -151,88 +189,18 @@ public class Cart extends AppCompatActivity {
             return result;
         }
     }
-    int totalSum=0;
-
-    private void collectData()
-    {//connection
-        try
-        {
-            URL url = new URL(urladdress);
-            HttpURLConnection con=(HttpURLConnection)url.openConnection();
-            con.setRequestMethod("GET");
-            is=new BufferedInputStream(con.getInputStream());
 
 
-        }
-        catch(Exception ex)
-        {
-            ex.printStackTrace();
-        }
-        // content
-        try
-        {
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            StringBuilder sb = new StringBuilder();
-            while ((line=br.readLine())!=null)
-            {
-                sb.append(line+"\n");
-            }
-            is.close();
-            result = sb.toString();
-
-        }
-
-        catch(Exception ex)
-        {
-            ex.printStackTrace();
-        }
-        //JSON
-        try
-        {
-            JSONArray ja = new JSONArray(result);
-            JSONObject jo=null;
-            pname = new String[ja.length()];
-            price = new String[ja.length()];
-            quantity = new String[ja.length()];
-
-            // imagepath = new String[ja.length()];
-
-            for(int i=0;i<ja.length();i++)
-            {
-                jo=ja.getJSONObject(i);
-                pname[i]=jo.getString("productID");
-                quantity[i]=jo.getString("quantity");
-                price[i]=jo.getString("price");
-                int numberq = Integer.parseInt(quantity[i]);
-                int numberp = Integer.parseInt(price[i]);
-
-                totalSum+=totalSum+(numberp*numberq);
-
-
-                //imagepath[i]=jo.getString("photo");
-
-            }
-
-
-
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
-
-    }
     public void checkOut(View view)
     {
         Bundle bundle = new Bundle();
 
-        bundle.putString("total", String.valueOf(totalSum));
+        bundle.putString("total", String.valueOf(total_price));
 
         Intent intent = new Intent(Cart.this, CheckOut.class);
         intent.putExtras(bundle);
         startActivity(intent);
         finish();
     }
-
 
 }

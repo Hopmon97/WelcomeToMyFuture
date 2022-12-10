@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.welcometomyfuture">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -13,10 +12,20 @@
         android:theme="@style/Theme.WelcomeToMyFuture"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".OrderDetails"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".productDetails"
             android:exported="true" />
         <activity
             android:name=".Georgosss"
+            android:exported="true" />
+        <activity
+            android:name=".OrdersActivity"
             android:exported="true" />
         <activity
             android:name=".admin"
