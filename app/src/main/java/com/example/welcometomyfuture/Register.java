@@ -1,20 +1,16 @@
 package com.example.welcometomyfuture;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import org.json.JSONObject;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -30,10 +26,10 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 public class Register extends AppCompatActivity {
-    private EditText etUsername,etSurname,etPassword,etRepeatPassword,etEmailAddress,etAddress,etCity,etCountry,etPostalCode,etPhone;
+    private EditText etUser,etUsername,etSurname,etPassword,etRepeatPassword,etEmailAddress,etAddress,etCity,etCountry,etPostalCode,etPhone;
     private RadioGroup rdEpilogi;
    // private Button btnRegister;
-    private String name,surname,password,repeatPassword,email,address,city,country,postal,phone,type;
+    private String user,name,surname,password,repeatPassword,email,address,city,country,postal,phone,type;
     //private int selection;
 
 
@@ -44,6 +40,7 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        etUser=findViewById(R.id.etUser);
         etUsername= findViewById(R.id.etUsername);
         etSurname= findViewById(R.id.etSurname);
         etPassword= findViewById(R.id.etPassword);
@@ -56,27 +53,9 @@ public class Register extends AppCompatActivity {
         etPhone= findViewById(R.id.etPhone);
         rdEpilogi = findViewById(R.id.rdEpilogi);
 
-
-       /* selection = rdEpilogi.getCheckedRadioButtonId();
-
-        if (selection==R.id.rbArgo)
-        {
-            type="1";
-        }else if(selection==R.id.rbFarmer)
-        {
-            type="2";
-        }else if(selection==R.id.rbSeller)
-        {
-            type="3";*/
-        //}
-
-
-
-       // btnRegister= findViewById(R.id.btnRegister);
-
     }
     public void save(View view)
-    {
+    {   user= etUser.getText().toString().trim();
         name= etUsername.getText().toString().trim();
         surname= etSurname.getText().toString().trim();
         password= etPassword.getText().toString().trim();
@@ -101,7 +80,7 @@ public class Register extends AppCompatActivity {
         else
         {
             RegisterUser registerUser = new RegisterUser(this);
-            registerUser.execute(name,surname,password,email,address,city,country,postal,phone,type);
+            registerUser.execute(user,name,surname,password,email,address,city,country,postal,phone,type);
 
         }
 
@@ -119,16 +98,17 @@ public class Register extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             try {
-                String name = params[0];
-                String surname= params[1];
-                String password = params[2];
-                String email = params[3];
-                String address  = params[4];
-                String city = params[5];
-                String country = params[6];
-                String postal = params[7];
-                String phone = params[8];
-                String type = params[9];
+                String user = params[0];
+                String name = params[1];
+                String surname= params[2];
+                String password = params[3];
+                String email = params[4];
+                String address  = params[5];
+                String city = params[6];
+                String country = params[7];
+                String postal = params[8];
+                String phone = params[9];
+                String type = params[10];
 
 
                 URL url = new URL("http://"+MainActivity.ip+"/Android/Registeration.php");
@@ -142,7 +122,8 @@ public class Register extends AppCompatActivity {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
 
-                String post_data = URLEncoder.encode("name","UTF-8")+"="+URLEncoder.encode(name,"UTF-8")+"&"
+                String post_data = URLEncoder.encode("user","UTF-8")+"="+URLEncoder.encode(user,"UTF-8")+"&"
+                +URLEncoder.encode("name","UTF-8")+"="+URLEncoder.encode(name,"UTF-8")+"&"
 
                 +URLEncoder.encode("surname","UTF-8")+"="+URLEncoder.encode(surname,"UTF-8")+"&"
 
@@ -156,16 +137,11 @@ public class Register extends AppCompatActivity {
 
                 +URLEncoder.encode("country","UTF-8")+"="+URLEncoder.encode(country,"UTF-8")+"&"
 
-                + URLEncoder.encode("postal","UTF-8")+"="+URLEncoder.encode(postal,"UTF-8")+"&"
+                +URLEncoder.encode("postal","UTF-8")+"="+URLEncoder.encode(postal,"UTF-8")+"&"
 
-                +URLEncoder.encode("phone","UTF-8")+"="+URLEncoder.encode(phone,"UTF-8")
-                        +"&"
+                +URLEncoder.encode("phone","UTF-8")+"="+URLEncoder.encode(phone,"UTF-8")+"&"
 
-                        +URLEncoder.encode("type","UTF-8")+"="+URLEncoder.encode(type,"UTF-8");
-
-
-                //URLEncoder.encode("name","UTF-8")+"="+URLEncoder.encode(name,"UTF-8")+"&"....
-
+                +URLEncoder.encode("type","UTF-8")+"="+URLEncoder.encode(type,"UTF-8");
 
 
 

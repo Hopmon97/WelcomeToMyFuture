@@ -1,16 +1,22 @@
 package com.example.welcometomyfuture;
 
+import static com.example.welcometomyfuture.background.type;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -42,7 +48,10 @@ public class OrdersActivity extends AppCompatActivity {
     String result = null;
 
 
-
+    BottomNavigationView bottom_navigation;
+    BottomNavigationView bottom_navigation2;
+    BottomNavigationView bottom_navigation3;
+    BottomNavigationView bottom_navigation4;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,11 +63,148 @@ public class OrdersActivity extends AppCompatActivity {
 
         GetOrder getOrder = new GetOrder(OrdersActivity.this);
         getOrder.execute();
+        bottom_navigation = findViewById(R.id.bottom_navigation);
+        bottom_navigation2 = findViewById(R.id.bottom_navigation2);
+        bottom_navigation3 = findViewById(R.id.bottom_navigation3);
+        bottom_navigation4 = findViewById(R.id.bottom_navigation4);
 
+        if (type.equals("0")) {
+
+            bottom_navigation.setVisibility(View.VISIBLE);
+            bottom_navigation2.setVisibility(View.GONE);
+            bottom_navigation3.setVisibility(View.GONE);
+            bottom_navigation4.setVisibility(View.GONE);
+            bottom_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.nav_home:
+                            startActivity(new Intent(getApplicationContext(), admin.class));
+                            return true;
+                        case R.id.nav_Users:
+                            startActivity(new Intent(getApplicationContext(), ListActivity.class));
+                            return true;
+                        case R.id.nav_products:
+                            startActivity(new Intent(getApplicationContext(), ProductsActivity.class));
+                            return true;
+                        case R.id.nav_cart:
+                            startActivity(new Intent(getApplicationContext(), Cart.class));
+                            return true;
+                        case R.id.nav_order:
+                            startActivity(new Intent(getApplicationContext(),OrdersActivity.class));
+                            return true;
+                    }
+                    return false;
+                }
+            });
+        }
+        else if(type.equals("1"))
+        {
+            bottom_navigation2.setVisibility(View.VISIBLE);
+
+            bottom_navigation.setVisibility(View.GONE);
+            bottom_navigation3.setVisibility(View.GONE);
+            bottom_navigation4.setVisibility(View.GONE);
+
+
+
+            bottom_navigation2.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.nav_home:
+                            startActivity(new Intent(getApplicationContext(), Geoponos.class));
+                            return true;
+                        case R.id.nav_products:
+                            startActivity(new Intent(getApplicationContext(), ProductsActivity.class));
+                            return true;
+                        case R.id.nav_cart:
+                            startActivity(new Intent(getApplicationContext(), Cart.class));
+                            return true;
+                        case R.id.nav_order:
+                            startActivity(new Intent(getApplicationContext(), OrdersActivity.class));
+                            return true;
+                    }
+                    return false;
+                }
+            });
+
+
+        }
+        else if(type.equals("2"))
+        {
+            bottom_navigation3 = findViewById(R.id.bottom_navigation3);
+            bottom_navigation3.setVisibility(View.VISIBLE);
+            bottom_navigation2.setVisibility(View.GONE);
+            bottom_navigation.setVisibility(View.GONE);
+            bottom_navigation4.setVisibility(View.GONE);
+
+            bottom_navigation3.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.nav_home:
+                            startActivity(new Intent(getApplicationContext(), Georgosss.class));
+                            return true;
+                        case R.id.nav_Users:
+                            startActivity(new Intent(getApplicationContext(), ListActivity.class));
+                            return true;
+                        case R.id.nav_cart:
+                            startActivity(new Intent(getApplicationContext(), Cart.class));
+                            return true;
+                        case R.id.nav_order:
+                            startActivity(new Intent(getApplicationContext(), OrdersActivity.class));
+                            return true;
+                    }
+                    return false;
+                }
+            });
+
+
+        }
+        else if(type.equals("3"))
+        {
+            bottom_navigation4 = findViewById(R.id.bottom_navigation4);
+            bottom_navigation4.setVisibility(View.VISIBLE);
+            bottom_navigation.setVisibility(View.GONE);
+            bottom_navigation2.setVisibility(View.GONE);
+            bottom_navigation3.setVisibility(View.GONE);
+
+            bottom_navigation4.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.nav_home:
+                            startActivity(new Intent(getApplicationContext(), SellerActivity.class));
+                            return true;
+                        case R.id.nav_preg:
+                            startActivity(new Intent(getApplicationContext(), productsRegister.class));
+                            return true;
+                        case R.id.nav_products:
+                            startActivity(new Intent(getApplicationContext(), ProductsActivity.class));
+                            return true;
+                        case R.id.nav_cart:
+                            startActivity(new Intent(getApplicationContext(), Cart.class));
+                            return true;
+                        case R.id.nav_order:
+                            startActivity(new Intent(getApplicationContext(), OrdersActivity.class));
+                            return true;
+                    }
+                    return false;
+                }
+            });
+
+
+        }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Bundle data = new Bundle();
+                data.putString("orderID", orderID[position]);
+
+
                 Intent intent = new Intent(OrdersActivity.this, OrderDetails.class);
+                intent.putExtras(data);
                 startActivity(intent);
             }
         });

@@ -25,6 +25,7 @@ public class background extends AsyncTask<String,Void,String> {
 
     public static String customerID;
     public static String type;
+    public static String userName;
     public static String customerName;
     public static String customerSurname;
     public static String password;
@@ -53,6 +54,7 @@ public class background extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPostExecute(String result) {
+        System.out.println("result is : " +result);
 
         if(result.equals("loginfailed"))
         {
@@ -66,6 +68,7 @@ public class background extends AsyncTask<String,Void,String> {
                 type=jo.getString("type");
 
                 customerID = jo.getString("customerID");
+                userName= jo.getString("userName");
                 customerName= jo.getString("customerName");
                 customerSurname= jo.getString("customerSurname");
                 password= jo.getString("password");

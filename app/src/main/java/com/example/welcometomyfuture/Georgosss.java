@@ -1,29 +1,21 @@
 package com.example.welcometomyfuture;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Update;
+import static com.example.welcometomyfuture.background.type;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -36,11 +28,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.text.BreakIterator;
 
 public class Georgosss extends AppCompatActivity {
     String urladdress = "http://" + MainActivity.ip + "/Android/customer.php";//rwta stelioooo
     String id;
+    String User;
     String Name;
     String Surname;
     String Email;
@@ -49,11 +41,14 @@ public class Georgosss extends AppCompatActivity {
     String Country;
     String PostalCode;
     String Phone;
-    String type;
 
-    EditText etID, etName, etSurname,etEmail,etAddress,etCity,etCountry,etPostalCode,etPhone; //....;
+
+    EditText etID,etUser, etName, etSurname,etEmail,etAddress,etCity,etCountry,etPostalCode,etPhone; //....;
 
     BottomNavigationView bottom_navigation;
+    BottomNavigationView bottom_navigation2;
+    BottomNavigationView bottom_navigation3;
+    BottomNavigationView bottom_navigation4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +56,7 @@ public class Georgosss extends AppCompatActivity {
         setContentView(R.layout.activity_georgosss);
 
         etID = findViewById(R.id.id);
+        etUser = findViewById(R.id.usern);
         etName = findViewById(R.id.p_name);
         etSurname = findViewById(R.id.p_surname);
         etEmail = findViewById(R.id.p_email);
@@ -73,6 +69,7 @@ public class Georgosss extends AppCompatActivity {
 
 
         etID.setText(background.customerID);
+        etUser.setText(background.userName);
         etName.setText(background.customerName);
         etSurname.setText(background.customerSurname);
         etEmail.setText(background.email);
@@ -84,28 +81,144 @@ public class Georgosss extends AppCompatActivity {
 
 
         bottom_navigation = findViewById(R.id.bottom_navigation);
+        bottom_navigation2 = findViewById(R.id.bottom_navigation2);
+        bottom_navigation3 = findViewById(R.id.bottom_navigation3);
+        bottom_navigation4 = findViewById(R.id.bottom_navigation4);
 
-        bottom_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.nav_home:
-                        startActivity(new Intent(getApplicationContext(),Georgosss.class));
-                        return true;
-                    case R.id.nav_products:
-                        startActivity(new Intent(getApplicationContext(), ProductsActivity.class));
-                        return true;
-                    case R.id.nav_cart:
-                        startActivity(new Intent(getApplicationContext(), Cart.class));
-                        return true;
+        if (type.equals("0")) {
+
+            bottom_navigation.setVisibility(View.VISIBLE);
+            bottom_navigation2.setVisibility(View.GONE);
+            bottom_navigation3.setVisibility(View.GONE);
+            bottom_navigation4.setVisibility(View.GONE);
+
+            bottom_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.nav_home:
+                            startActivity(new Intent(getApplicationContext(), admin.class));
+                            return true;
+                        case R.id.nav_Users:
+                            startActivity(new Intent(getApplicationContext(), ListActivity.class));
+                            return true;
+                        case R.id.nav_products:
+                            startActivity(new Intent(getApplicationContext(), ProductsActivity.class));
+                            return true;
+                        case R.id.nav_cart:
+                            startActivity(new Intent(getApplicationContext(), Cart.class));
+                            return true;
+                        case R.id.nav_order:
+                            startActivity(new Intent(getApplicationContext(),OrdersActivity.class));
+                            return true;
+                    }
+                    return false;
                 }
-                return false;
-            }
-        });
+            });
+        }
+        else if(type.equals("1"))
+        {
+            bottom_navigation2.setVisibility(View.VISIBLE);
+
+            bottom_navigation.setVisibility(View.GONE);
+            bottom_navigation3.setVisibility(View.GONE);
+            bottom_navigation4.setVisibility(View.GONE);
+
+
+
+            bottom_navigation2.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.nav_home:
+                            startActivity(new Intent(getApplicationContext(), Geoponos.class));
+                            return true;
+                        case R.id.nav_products:
+                            startActivity(new Intent(getApplicationContext(), ProductsActivity.class));
+                            return true;
+                        case R.id.nav_cart:
+                            startActivity(new Intent(getApplicationContext(), Cart.class));
+                            return true;
+                        case R.id.nav_order:
+                            startActivity(new Intent(getApplicationContext(), OrdersActivity.class));
+                            return true;
+                    }
+                    return false;
+                }
+            });
+
+
+        }
+        else if(type.equals("2"))
+        {
+            bottom_navigation3.setVisibility(View.VISIBLE);
+            bottom_navigation2.setVisibility(View.GONE);
+            bottom_navigation.setVisibility(View.GONE);
+            bottom_navigation4.setVisibility(View.GONE);
+
+            bottom_navigation3.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.nav_home:
+                            startActivity(new Intent(getApplicationContext(), Georgosss.class));
+                            return true;
+                        case R.id.nav_Users:
+                            startActivity(new Intent(getApplicationContext(), ListActivity.class));
+                            return true;
+                        case R.id.nav_cart:
+                            startActivity(new Intent(getApplicationContext(), Cart.class));
+                            return true;
+                        case R.id.nav_order:
+                            startActivity(new Intent(getApplicationContext(), OrdersActivity.class));
+                            return true;
+                    }
+                    return false;
+                }
+            });
+
+
+        }
+        else if(type.equals("3"))
+        {
+
+            bottom_navigation4.setVisibility(View.VISIBLE);
+            bottom_navigation.setVisibility(View.GONE);
+            bottom_navigation2.setVisibility(View.GONE);
+            bottom_navigation3.setVisibility(View.GONE);
+
+            bottom_navigation4.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.nav_home:
+                            startActivity(new Intent(getApplicationContext(), SellerActivity.class));
+                            return true;
+                        case R.id.nav_preg:
+                            startActivity(new Intent(getApplicationContext(), productsRegister.class));
+                            return true;
+                        case R.id.nav_products:
+                            startActivity(new Intent(getApplicationContext(), ProductsActivity.class));
+                            return true;
+                        case R.id.nav_cart:
+                            startActivity(new Intent(getApplicationContext(), Cart.class));
+                            return true;
+                        case R.id.nav_order:
+                            startActivity(new Intent(getApplicationContext(), OrdersActivity.class));
+                            return true;
+                    }
+                    return false;
+                }
+            });
+
+
+        }
     }
 
     public void updateData(View view)
     {
+        User = etUser.getText().toString();
+        background.userName = User;
         Name = etName.getText().toString();
         background.customerName = Name;
         Surname = etSurname.getText().toString();
@@ -186,6 +299,7 @@ public class Georgosss extends AppCompatActivity {
                 OutputStream ops = http.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(ops, StandardCharsets.UTF_8));
                 String data = URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(background.customerID, "UTF-8") + "&&" +
+                        URLEncoder.encode("user", "UTF-8") + "=" + URLEncoder.encode(User, "UTF-8") + "&&" +
                         URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(Name, "UTF-8") + "&&" +
                         URLEncoder.encode("surname", "UTF-8") + "=" + URLEncoder.encode(Surname, "UTF-8") + "&&" +
                         URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(Email, "UTF-8") + "&&" +

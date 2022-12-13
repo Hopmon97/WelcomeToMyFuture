@@ -13,23 +13,23 @@ import androidx.annotation.Nullable;
 
 import java.text.BreakIterator;
 
-public class CartAdabter extends ArrayAdapter<String> {
+public class OrderDetailsAdapter extends ArrayAdapter<String> {
 
     private final Activity context;
 
-    private final String[] pname;
+    private final String[] perigrafi;
     private final String[] price;
-    private final String[] quantity;
-
+    private final String[] posotita
+            ;
 
     Bitmap bitmap;
-    public CartAdabter(Activity context, String[] pname,String[]price, String[]quantity)
+    public OrderDetailsAdapter(Activity context,String[]perigrafi,String[]price, String[] posotita)
     {
-        super(context, R.layout.cart_row,pname);
+        super(context, R.layout.order_detail_row);
         this.context=context;
-        this.pname=pname;
+        this.perigrafi = perigrafi;
         this.price = price;
-        this.quantity=quantity;
+        this.posotita=posotita;
 
     }
     @NonNull
@@ -41,7 +41,7 @@ public class CartAdabter extends ArrayAdapter<String> {
         ViewHolder viewHolder=null;
         if(r==null) {
             LayoutInflater layoutInflater = context.getLayoutInflater();
-            r = layoutInflater.inflate(R.layout.cart_row, null, true);
+            r = layoutInflater.inflate(R.layout.order_detail_row, null, true);
             viewHolder = new ViewHolder(r);
             r.setTag(viewHolder);
         }
@@ -49,13 +49,19 @@ public class CartAdabter extends ArrayAdapter<String> {
         {
             viewHolder=(ViewHolder)r.getTag();
         }
-        viewHolder.tvpname.setText(pname[position]);
-        viewHolder.tvprice.setText(price[position]);
-        viewHolder.tvQuan.setText(quantity[position]);
+        viewHolder.Product.setText(perigrafi[position]);
+        viewHolder.tvPrice.setText(price[position]);
+        viewHolder.tvposotita.setText(posotita[position]);
 
 
 
 
+
+        /*Picasso
+                .with(context)
+                .load(imagepath[position])
+                .into(viewHolder.ivw);
+        */
 
         return r;
     }
@@ -65,20 +71,20 @@ public class CartAdabter extends ArrayAdapter<String> {
 
     class  ViewHolder
     {
-        public BreakIterator tvPrice;
-        TextView tvid, tvpname, tvprice, tvQuan;
+        public BreakIterator Price;
+        TextView Product, tvPrice, tvposotita;
 
 
         // ImageView ivw;
 
         ViewHolder(View v)
         {
-            tvid= v.findViewById(R.id.orderID);
-            tvpname= v.findViewById(R.id.tvpname);
-            tvprice= v.findViewById(R.id.tvprice);
-            tvQuan= v.findViewById(R.id.tvQuan);
+            Product= v.findViewById(R.id.Product);
+            tvPrice= v.findViewById(R.id.tvPrice);
+            tvposotita= v.findViewById(R.id.tvposotita);
 
 
+            // ivw=(ImageView)v.findViewById(R.id.iv);
         }
     }
 

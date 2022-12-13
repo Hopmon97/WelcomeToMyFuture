@@ -77,7 +77,7 @@ public class CheckOut extends AppCompatActivity {
 
         priceTotal.setText(data.getString("total"));
 
-        etUsername = findViewById(R.id.etUsername);
+        etUsername = findViewById(R.id.etUser);
         etPhone= findViewById(R.id.phone);
         date = findViewById(R.id.date);
         etEmail = findViewById(R.id.email);

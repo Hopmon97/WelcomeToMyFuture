@@ -1,38 +1,34 @@
 package com.example.welcometomyfuture;
 
-import androidx.appcompat.app.AppCompatActivity;
+import static com.example.welcometomyfuture.background.type;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 
 public class ListActivity extends AppCompatActivity {
 
     String urladdress="http://"+MainActivity.ip +"/Android/customer.php";//rwta stelioooo
     String id;
     String[] customer;
+    String[] user;
     String[] name;
     String[] surname;
     String[] email;
@@ -41,7 +37,8 @@ public class ListActivity extends AppCompatActivity {
     String[] country;
     String[] postalcode;
     String[] phone;
-    String[] type;
+    String[] typelist;
+
 
 
 
@@ -50,6 +47,10 @@ public class ListActivity extends AppCompatActivity {
     String line= null;
     String result = null;
 
+    BottomNavigationView bottom_navigation;
+    BottomNavigationView bottom_navigation2;
+    BottomNavigationView bottom_navigation3;
+    BottomNavigationView bottom_navigation4;
 
 
     @Override
@@ -61,9 +62,143 @@ public class ListActivity extends AppCompatActivity {
 
         StrictMode.setThreadPolicy((new StrictMode.ThreadPolicy.Builder().permitNetwork().build()));
         collectData();
-        ListViewAdapter customLiseView=new ListViewAdapter(this, customer,name,surname, email, address, city, country, postalcode, phone, type);
+        ListViewAdapter customLiseView=new ListViewAdapter(this, customer,user,name,surname, email, address, city, country, postalcode, phone, typelist);
         listView.setAdapter(customLiseView);
 
+        bottom_navigation = findViewById(R.id.bottom_navigation);
+        bottom_navigation2 = findViewById(R.id.bottom_navigation2);
+        bottom_navigation3 = findViewById(R.id.bottom_navigation3);
+        bottom_navigation4 = findViewById(R.id.bottom_navigation4);
+
+
+        if (type.equals("0")) {
+
+            bottom_navigation.setVisibility(View.VISIBLE);
+            bottom_navigation2.setVisibility(View.GONE);
+            bottom_navigation3.setVisibility(View.GONE);
+            bottom_navigation4.setVisibility(View.GONE);
+            bottom_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.nav_home:
+                            startActivity(new Intent(getApplicationContext(), admin.class));
+                            return true;
+                        case R.id.nav_Users:
+                            startActivity(new Intent(getApplicationContext(), ListActivity.class));
+                            return true;
+                        case R.id.nav_products:
+                            startActivity(new Intent(getApplicationContext(), ProductsActivity.class));
+                            return true;
+                        case R.id.nav_cart:
+                            startActivity(new Intent(getApplicationContext(), Cart.class));
+                            return true;
+                        case R.id.nav_order:
+                            startActivity(new Intent(getApplicationContext(),OrdersActivity.class));
+                            return true;
+                    }
+                    return false;
+                }
+            });
+        }
+        else if(type.equals("1"))
+        {
+            bottom_navigation2.setVisibility(View.VISIBLE);
+
+            bottom_navigation.setVisibility(View.GONE);
+            bottom_navigation3.setVisibility(View.GONE);
+            bottom_navigation4.setVisibility(View.GONE);
+
+
+
+            bottom_navigation2.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.nav_home:
+                            startActivity(new Intent(getApplicationContext(), Geoponos.class));
+                            return true;
+                        case R.id.nav_products:
+                            startActivity(new Intent(getApplicationContext(), ProductsActivity.class));
+                            return true;
+                        case R.id.nav_cart:
+                            startActivity(new Intent(getApplicationContext(), Cart.class));
+                            return true;
+                        case R.id.nav_order:
+                            startActivity(new Intent(getApplicationContext(), OrdersActivity.class));
+                            return true;
+                    }
+                    return false;
+                }
+            });
+
+
+        }
+        else if(type.equals("2"))
+        {
+            bottom_navigation3 = findViewById(R.id.bottom_navigation3);
+            bottom_navigation3.setVisibility(View.VISIBLE);
+            bottom_navigation2.setVisibility(View.GONE);
+            bottom_navigation.setVisibility(View.GONE);
+            bottom_navigation4.setVisibility(View.GONE);
+
+            bottom_navigation3.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.nav_home:
+                            startActivity(new Intent(getApplicationContext(), Georgosss.class));
+                            return true;
+                        case R.id.nav_Users:
+                            startActivity(new Intent(getApplicationContext(), ListActivity.class));
+                            return true;
+                        case R.id.nav_cart:
+                            startActivity(new Intent(getApplicationContext(), Cart.class));
+                            return true;
+                        case R.id.nav_order:
+                            startActivity(new Intent(getApplicationContext(), OrdersActivity.class));
+                            return true;
+                    }
+                    return false;
+                }
+            });
+
+
+        }
+        else if(type.equals("3"))
+        {
+            bottom_navigation4 = findViewById(R.id.bottom_navigation4);
+            bottom_navigation4.setVisibility(View.VISIBLE);
+            bottom_navigation.setVisibility(View.GONE);
+            bottom_navigation2.setVisibility(View.GONE);
+            bottom_navigation3.setVisibility(View.GONE);
+
+            bottom_navigation4.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.nav_home:
+                            startActivity(new Intent(getApplicationContext(), SellerActivity.class));
+                            return true;
+                        case R.id.nav_preg:
+                            startActivity(new Intent(getApplicationContext(), productsRegister.class));
+                            return true;
+                        case R.id.nav_products:
+                            startActivity(new Intent(getApplicationContext(), ProductsActivity.class));
+                            return true;
+                        case R.id.nav_cart:
+                            startActivity(new Intent(getApplicationContext(), Cart.class));
+                            return true;
+                        case R.id.nav_order:
+                            startActivity(new Intent(getApplicationContext(), OrdersActivity.class));
+                            return true;
+                    }
+                    return false;
+                }
+            });
+
+
+        }
 
     }
 
@@ -106,6 +241,7 @@ public class ListActivity extends AppCompatActivity {
             JSONArray ja = new JSONArray(result);
             JSONObject jo=null;
             customer = new String[ja.length()];
+            user = new String[ja.length()];
             name = new String[ja.length()];
             surname = new String[ja.length()];
             email = new String[ja.length()];
@@ -114,7 +250,7 @@ public class ListActivity extends AppCompatActivity {
             country = new String[ja.length()];
             postalcode = new String[ja.length()];
             phone = new String[ja.length()];
-            type = new String[ja.length()];
+            typelist = new String[ja.length()];
 
            // imagepath = new String[ja.length()];
 
@@ -122,6 +258,7 @@ public class ListActivity extends AppCompatActivity {
             {
                 jo=ja.getJSONObject(i);
                 customer[i]=jo.getString("customerID");
+                user[i]=jo.getString("userName");
                 name[i]=jo.getString("customerName");
                 surname[i]=jo.getString("customerSurname");
                 email[i]=jo.getString("email");
@@ -130,7 +267,7 @@ public class ListActivity extends AppCompatActivity {
                 country[i]=jo.getString("country");
                 postalcode[i]=jo.getString("postalcode");
                 phone[i]=jo.getString("phone");
-                type[i]=jo.getString("type");
+                typelist[i]=jo.getString("type");
 
 
                 //imagepath[i]=jo.getString("photo");

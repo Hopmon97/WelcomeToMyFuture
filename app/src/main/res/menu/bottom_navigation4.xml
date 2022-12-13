@@ -7,29 +7,25 @@
         android:title="Home"
         />
     <item
-        android:id="@+id/nav_Users"
-        android:icon="@drawable/ic_baseline_person_outline_24"
-        android:title="Users"
-        android:visible="true"
+        android:id="@+id/nav_preg"
+        android:icon="@drawable/product"
+        android:title="Register Products"
         />
     <item
         android:id="@+id/nav_products"
         android:icon="@drawable/product"
         android:title="Products"
-        android:visible="true"
         />
 
     <item
         android:id="@+id/nav_cart"
         android:icon="@drawable/ic_baseline_shopping_cart_24"
         android:title="Cart"
-        android:visible="true"
         />
     <item
         android:id="@+id/nav_order"
         android:icon="@drawable/ic_baseline_shopping_cart_24"
-        android:title="Order"
-        android:visible="true"
+        android:title="gewponos"
         />
 
 </menu>

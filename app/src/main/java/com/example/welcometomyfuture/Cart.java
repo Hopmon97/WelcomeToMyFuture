@@ -1,5 +1,7 @@
 package com.example.welcometomyfuture;
 
+import static com.example.welcometomyfuture.background.type;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -50,7 +52,11 @@ public class Cart extends AppCompatActivity {
 
     Double total_price = 0.0;
 
+    BottomNavigationView bottom_navigation;
     BottomNavigationView bottom_navigation2;
+    BottomNavigationView bottom_navigation3;
+    BottomNavigationView bottom_navigation4;
+
 
 
     @Override
@@ -59,37 +65,146 @@ public class Cart extends AppCompatActivity {
         setContentView(R.layout.activity_cart);
 
 
-        listView= findViewById(R.id.recview);
-        tvTotal=findViewById(R.id.tvTotal);
+        listView = findViewById(R.id.recview);
+        tvTotal = findViewById(R.id.tvTotal);
 
         StrictMode.setThreadPolicy((new StrictMode.ThreadPolicy.Builder().permitNetwork().build()));
 
         GetCart getCart = new GetCart(Cart.this);
         getCart.execute();
 
+        bottom_navigation = findViewById(R.id.bottom_navigation);
+        bottom_navigation2 = findViewById(R.id.bottom_navigation2);
+        bottom_navigation3 = findViewById(R.id.bottom_navigation3);
+        bottom_navigation4 = findViewById(R.id.bottom_navigation4);
 
-        bottom_navigation2 = findViewById(R.id.bottom_navigation);
+        if (type.equals("0")) {
 
-        bottom_navigation2.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.nav_home:
-                        startActivity(new Intent(getApplicationContext(), admin.class));
-                        return true;
-                    case R.id.nav_products:
-                        startActivity(new Intent(getApplicationContext(), ProductsActivity.class));
-                        return true;
-                    case R.id.nav_cart:
-                        startActivity(new Intent(getApplicationContext(), Cart.class));
-                        return true;
-                    case R.id.nav_order:
-                        startActivity(new Intent(getApplicationContext(), OrdersActivity.class));
-                        return true;
+            bottom_navigation.setVisibility(View.VISIBLE);
+            bottom_navigation2.setVisibility(View.GONE);
+            bottom_navigation3.setVisibility(View.GONE);
+            bottom_navigation4.setVisibility(View.GONE);
+            bottom_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.nav_home:
+                            startActivity(new Intent(getApplicationContext(), admin.class));
+                            return true;
+                        case R.id.nav_Users:
+                            startActivity(new Intent(getApplicationContext(), ListActivity.class));
+                            return true;
+                        case R.id.nav_products:
+                            startActivity(new Intent(getApplicationContext(), ProductsActivity.class));
+                            return true;
+                        case R.id.nav_cart:
+                            startActivity(new Intent(getApplicationContext(), Cart.class));
+                            return true;
+                        case R.id.nav_order:
+                            startActivity(new Intent(getApplicationContext(),OrdersActivity.class));
+                            return true;
+                    }
+                    return false;
                 }
-                return false;
-            }
-        });
+            });
+        }
+        else if(type.equals("1"))
+        {
+            bottom_navigation2.setVisibility(View.VISIBLE);
+
+            bottom_navigation.setVisibility(View.GONE);
+            bottom_navigation3.setVisibility(View.GONE);
+            bottom_navigation4.setVisibility(View.GONE);
+
+
+
+            bottom_navigation2.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.nav_home:
+                            startActivity(new Intent(getApplicationContext(), Geoponos.class));
+                            return true;
+                        case R.id.nav_products:
+                            startActivity(new Intent(getApplicationContext(), ProductsActivity.class));
+                            return true;
+                        case R.id.nav_cart:
+                            startActivity(new Intent(getApplicationContext(), Cart.class));
+                            return true;
+                        case R.id.nav_order:
+                            startActivity(new Intent(getApplicationContext(), OrdersActivity.class));
+                            return true;
+                    }
+                    return false;
+                }
+            });
+
+
+        }
+        else if(type.equals("2"))
+        {
+            bottom_navigation3.setVisibility(View.VISIBLE);
+            bottom_navigation2.setVisibility(View.GONE);
+            bottom_navigation.setVisibility(View.GONE);
+            bottom_navigation4.setVisibility(View.GONE);
+
+            bottom_navigation3.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.nav_home:
+                            startActivity(new Intent(getApplicationContext(), Georgosss.class));
+                            return true;
+                        case R.id.nav_Users:
+                            startActivity(new Intent(getApplicationContext(), ListActivity.class));
+                            return true;
+                        case R.id.nav_cart:
+                            startActivity(new Intent(getApplicationContext(), Cart.class));
+                            return true;
+                        case R.id.nav_order:
+                            startActivity(new Intent(getApplicationContext(), OrdersActivity.class));
+                            return true;
+                    }
+                    return false;
+                }
+            });
+
+
+        }
+        else if(type.equals("3"))
+        {
+
+            bottom_navigation4.setVisibility(View.VISIBLE);
+            bottom_navigation.setVisibility(View.GONE);
+            bottom_navigation2.setVisibility(View.GONE);
+            bottom_navigation3.setVisibility(View.GONE);
+
+            bottom_navigation4.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.nav_home:
+                            startActivity(new Intent(getApplicationContext(), SellerActivity.class));
+                            return true;
+                        case R.id.nav_preg:
+                            startActivity(new Intent(getApplicationContext(), productsRegister.class));
+                            return true;
+                        case R.id.nav_products:
+                            startActivity(new Intent(getApplicationContext(), ProductsActivity.class));
+                            return true;
+                        case R.id.nav_cart:
+                            startActivity(new Intent(getApplicationContext(), Cart.class));
+                            return true;
+                        case R.id.nav_order:
+                            startActivity(new Intent(getApplicationContext(), OrdersActivity.class));
+                            return true;
+                    }
+                    return false;
+                }
+            });
+
+
+        }
     }
 
     public class GetCart extends AsyncTask<String,Void,String> {
