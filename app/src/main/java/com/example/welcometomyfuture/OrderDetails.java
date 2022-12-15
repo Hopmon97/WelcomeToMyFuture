@@ -32,6 +32,7 @@ public class OrderDetails extends AppCompatActivity {
     String[] price;
     String[] perigrafi;
     String[] posotita;
+    String[] eventID;
     String orderID;
 
 
@@ -56,8 +57,7 @@ public class OrderDetails extends AppCompatActivity {
         GetOrder getOrder = new GetOrder(OrderDetails.this);
         getOrder.execute();
 
-        OrderDetailsAdapter customLiseView=new OrderDetailsAdapter(OrderDetails.this, price,perigrafi,posotita);
-        listView.setAdapter(customLiseView);
+
 
 
     }
@@ -79,37 +79,38 @@ public class OrderDetails extends AppCompatActivity {
 
             System.out.println(result);
             Toast.makeText(OrderDetails.this, "beforetry", Toast.LENGTH_SHORT).show();
-
-
             try
             {
-
-
-
                 JSONArray ja = new JSONArray(result);
+
+                System.out.println("result " + result);
 
                 JSONObject jo=null;
 
                 perigrafi = new String[ja.length()];
                 price = new String[ja.length()];
                 posotita = new String[ja.length()];
+                eventID = new String[ja.length()];
 
 
                 // imagepath = new String[ja.length()];
 
                 for(int i=0;i<ja.length();i++)
                 {
-
                     jo=ja.getJSONObject(i);
                     perigrafi[i]=jo.getString("productName");
                     price[i]=jo.getString("price");
                     posotita[i]=jo.getString("quantity");
+                    eventID[i]=jo.getString("productID");
                     Toast.makeText(OrderDetails.this,  posotita[i] , Toast.LENGTH_SHORT).show();
-
-
 
                     //imagepath[i]=jo.getString("photo");
                 }
+
+                System.out.println("perigrafi: " + perigrafi + "price " + price + " quantity " + posotita);
+
+                OrderDetailsAdapter customLiseView=new OrderDetailsAdapter(OrderDetails.this, price,perigrafi,posotita,eventID);
+                listView.setAdapter(customLiseView);
 
 
             }

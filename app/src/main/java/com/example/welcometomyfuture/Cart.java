@@ -53,7 +53,7 @@ public class Cart extends AppCompatActivity {
     Double total_price = 0.0;
 
     BottomNavigationView bottom_navigation;
-    BottomNavigationView bottom_navigation2;
+    BottomNavigationView bottom_navigation5;
     BottomNavigationView bottom_navigation3;
     BottomNavigationView bottom_navigation4;
 
@@ -74,14 +74,14 @@ public class Cart extends AppCompatActivity {
         getCart.execute();
 
         bottom_navigation = findViewById(R.id.bottom_navigation);
-        bottom_navigation2 = findViewById(R.id.bottom_navigation2);
+        bottom_navigation5 = findViewById(R.id.bottom_navigation5);
         bottom_navigation3 = findViewById(R.id.bottom_navigation3);
         bottom_navigation4 = findViewById(R.id.bottom_navigation4);
 
         if (type.equals("0")) {
 
             bottom_navigation.setVisibility(View.VISIBLE);
-            bottom_navigation2.setVisibility(View.GONE);
+            bottom_navigation5.setVisibility(View.GONE);
             bottom_navigation3.setVisibility(View.GONE);
             bottom_navigation4.setVisibility(View.GONE);
             bottom_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -101,24 +101,50 @@ public class Cart extends AppCompatActivity {
                             startActivity(new Intent(getApplicationContext(), Cart.class));
                             return true;
                         case R.id.nav_order:
-                            startActivity(new Intent(getApplicationContext(),OrdersActivity.class));
+                            startActivity(new Intent(getApplicationContext(), OrdersActivity.class));
                             return true;
                     }
                     return false;
                 }
             });
-        }
-        else if(type.equals("1"))
-        {
-            bottom_navigation2.setVisibility(View.VISIBLE);
+        } else if (type.equals("1")) {
+            bottom_navigation5.setVisibility(View.VISIBLE);
 
             bottom_navigation.setVisibility(View.GONE);
             bottom_navigation3.setVisibility(View.GONE);
             bottom_navigation4.setVisibility(View.GONE);
 
 
+            bottom_navigation5.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.nav_home:
+                            startActivity(new Intent(getApplicationContext(), Georgosss.class));
+                            return true;
+                        case R.id.nav_products:
+                            startActivity(new Intent(getApplicationContext(), ProductsActivity.class));
+                            return true;
+                        case R.id.nav_cart:
+                            startActivity(new Intent(getApplicationContext(), Cart.class));
+                            return true;
+                        case R.id.nav_order:
+                            startActivity(new Intent(getApplicationContext(), OrdersActivity.class));
+                            return true;
+                    }
+                    return false;
+                }
+            });
 
-            bottom_navigation2.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        } else if (type.equals("2")) {
+            bottom_navigation3 = findViewById(R.id.bottom_navigation3);
+            bottom_navigation3.setVisibility(View.VISIBLE);
+            bottom_navigation5.setVisibility(View.GONE);
+            bottom_navigation.setVisibility(View.GONE);
+            bottom_navigation4.setVisibility(View.GONE);
+
+            bottom_navigation3.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch (item.getItemId()) {
@@ -140,43 +166,10 @@ public class Cart extends AppCompatActivity {
             });
 
 
-        }
-        else if(type.equals("2"))
-        {
-            bottom_navigation3.setVisibility(View.VISIBLE);
-            bottom_navigation2.setVisibility(View.GONE);
-            bottom_navigation.setVisibility(View.GONE);
-            bottom_navigation4.setVisibility(View.GONE);
-
-            bottom_navigation3.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    switch (item.getItemId()) {
-                        case R.id.nav_home:
-                            startActivity(new Intent(getApplicationContext(), Georgosss.class));
-                            return true;
-                        case R.id.nav_Users:
-                            startActivity(new Intent(getApplicationContext(), ListActivity.class));
-                            return true;
-                        case R.id.nav_cart:
-                            startActivity(new Intent(getApplicationContext(), Cart.class));
-                            return true;
-                        case R.id.nav_order:
-                            startActivity(new Intent(getApplicationContext(), OrdersActivity.class));
-                            return true;
-                    }
-                    return false;
-                }
-            });
-
-
-        }
-        else if(type.equals("3"))
-        {
-
+        } else if (type.equals("3")) {
             bottom_navigation4.setVisibility(View.VISIBLE);
             bottom_navigation.setVisibility(View.GONE);
-            bottom_navigation2.setVisibility(View.GONE);
+            bottom_navigation5.setVisibility(View.GONE);
             bottom_navigation3.setVisibility(View.GONE);
 
             bottom_navigation4.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -202,10 +195,7 @@ public class Cart extends AppCompatActivity {
                     return false;
                 }
             });
-
-
-        }
-    }
+        } }
 
     public class GetCart extends AsyncTask<String,Void,String> {
 

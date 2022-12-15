@@ -5,13 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".OrdersActivity">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".ProductsActivity"
     android:orientation="vertical"
+    android:layout_alignBottom="@id/bottom_navigation5"
     android:background="@drawable/backgroun"
     >
     <ListView
@@ -20,11 +22,13 @@
         android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp"
+
         />
 
 </LinearLayout>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation2"
+        android:id="@+id/bottom_navigation5"
         android:layout_width="413dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -32,7 +36,19 @@
         android:background="#CE171516"
         android:foregroundGravity="center"
         app:backgroundTint="@color/white"
-        app:menu="@menu/bottom_navigation2" />
+        app:menu="@menu/bottom_navigation5" />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation4"
+        android:layout_width="413dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:background="#CE171516"
+        android:foregroundGravity="center"
+        app:backgroundTint="@color/white"
+        app:menu="@menu/bottom_navigation4" />
+
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation3"
         android:layout_width="413dp"
@@ -53,15 +69,5 @@
         android:foregroundGravity="center"
         app:backgroundTint="@color/white"
         app:menu="@menu/bottom_navigation" />
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation4"
-        android:layout_width="413dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:visibility="gone"
-        android:background="#CE171516"
-        android:foregroundGravity="center"
-        app:backgroundTint="@color/white"
-        app:menu="@menu/bottom_navigation4" />
 
 </RelativeLayout>

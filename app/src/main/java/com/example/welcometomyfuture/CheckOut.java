@@ -50,7 +50,7 @@ public class CheckOut extends AppCompatActivity {
 
     //paypal initializers
     PayPalConfiguration m_configuration;
-    String m_paypalCliendId = "AfP_6MP7ZjUM0f9MVE_c3b6TXKBmBmEYsZ9HavyeDwOc1nPRD6_dkAAOgy-58VGsNU4WHyprrnT7xTL9";
+    String m_paypalCliendId = "Ac8UiKFxgFJc0WF2q6Pp-N6tS5MJaaWMNVlTRDr4YgD0bSjhPCF8KVvLGkdymHP8BB68PiJJSAJQa9PJ";
     Intent m_service;
     int m_paypalRequestCode = 999;
 
@@ -115,9 +115,9 @@ public class CheckOut extends AppCompatActivity {
         total = priceTotal.getText().toString();
         Date = date.getText().toString();
 
-        AddOrder orderWorker = new AddOrder(this);
-        orderWorker.execute();
-        //pay();
+        //AddOrder orderWorker = new AddOrder(this);
+        //orderWorker.execute();
+        pay();
 
     }
 
@@ -239,9 +239,16 @@ public class CheckOut extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
+
+            System.out.println(result);
             if(result.equals("success"))
             {
                 Toast.makeText(CheckOut.this, "Your order have been submitted successfully!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(CheckOut.this,OrdersActivity.class);
+                startActivity(intent);
+                finish();
+
+
             }
             else
             {

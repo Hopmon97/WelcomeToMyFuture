@@ -180,7 +180,10 @@ public class ListViewAdapter extends ArrayAdapter<String> {
             try {
                 if (result.equals("success")) {
                     Intent intent = new Intent(context, Geoponos.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
                     context.startActivity(intent);
+
                 }
                 else{
                     Toast.makeText(context, "Failed to delete", Toast.LENGTH_LONG).show();

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OrdersDetail">
+    tools:context=".OrderDetails">
 
     <LinearLayout
         android:id="@+id/headerpanel"
@@ -39,23 +39,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
             android:gravity="center"
-            android:text="Discription"
-            android:textColor="#fff"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textView14"
-            android:layout_width="93dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
-            android:layout_weight="1"
-            android:gravity="center"
             android:text="Quantity"
             android:textColor="#fff"
             android:textSize="18dp"
             android:textStyle="bold" />
-
 
     </LinearLayout>
 

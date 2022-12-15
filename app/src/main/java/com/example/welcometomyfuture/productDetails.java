@@ -1,7 +1,5 @@
 package com.example.welcometomyfuture;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -12,6 +10,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.squareup.picasso.Picasso;
 
@@ -30,7 +30,7 @@ import java.nio.charset.StandardCharsets;
 
 public class productDetails extends AppCompatActivity {
 
-    String productID, name, description, price, seller, image, quantity, new_price;
+    String productID, name, description, price, seller, image, quantity, new_price,totalq;
 
     TextView tvID, tvName, tvDescription, tvPrice, tvSeller;
     ImageView iv;
@@ -61,6 +61,7 @@ public class productDetails extends AppCompatActivity {
         price=data.getString("price");
         seller=data.getString("seller");
         image=data.getString("image");
+        totalq=data.getString("totalq");
 
         tvID.setText(productID);
         tvName.setText(name);
@@ -92,13 +93,21 @@ public class productDetails extends AppCompatActivity {
                 System.out.println("price "+price);
                 System.out.println("quantity " +quantity);
 
-                new_price = Double.toString(Double.valueOf(price) * Double.valueOf(quantity));
+                if (Integer.parseInt(quantity) > Integer.parseInt(totalq))
+                {
+                    Toast.makeText(productDetails.this, "Your Quantity is greater that the available  Quantity. The available quantity is: "+totalq, Toast.LENGTH_LONG).show();
+                }
+                else {
 
-                System.out.println("total_price  " +new_price);
+
+                    new_price = Double.toString(Double.valueOf(price) * Double.valueOf(quantity));
+
+                    System.out.println("total_price  " + new_price);
 
 
-                AddCart addCart = new AddCart(productDetails.this);
-                addCart.execute();
+                    AddCart addCart = new AddCart(productDetails.this);
+                    addCart.execute();
+                }
             }
         });
 

@@ -1,5 +1,6 @@
 package com.example.welcometomyfuture;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     EditText pas, usr,typ;
+
+    public static Context context;
 
     public static String ip="192.168.0.12";
     @Override
@@ -24,7 +27,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
         }
+
+
     public void loginBtn(View view){
         String user= usr.getText().toString();
         String pass= pas.getText().toString();

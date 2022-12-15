@@ -32,6 +32,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
+
 public class ProductsListViewActivity extends ArrayAdapter<String> {
 
     private final Activity context;
@@ -45,6 +46,9 @@ public class ProductsListViewActivity extends ArrayAdapter<String> {
     private final String[] image;
     private final String[] pquantity;
     private final String[] typelist;
+
+    Button btnDeleteProducts;
+
 
 
     Bitmap bitmap;
@@ -60,7 +64,6 @@ public class ProductsListViewActivity extends ArrayAdapter<String> {
         this.image = image;
         this.pquantity = pquantity;
         this.typelist=typelist;
-
 
     }
 
@@ -93,15 +96,15 @@ public class ProductsListViewActivity extends ArrayAdapter<String> {
 
         if(typelist[position].equals("1"))
         {
-            viewHolder.ptype.setText("Gewrgous");
+            viewHolder.ptype.setText("Farmer");
         }
         else if(typelist[position].equals("2"))
         {
-            viewHolder.ptype.setText("Geoponous");
+            viewHolder.ptype.setText("Agronomist");
         }
         else if(typelist[position].equals("3"))
         {
-            viewHolder.ptype.setText("Gewrgous and Geoponous");
+            viewHolder.ptype.setText("Farmer and Agronomist");
         }
 
 
@@ -134,6 +137,8 @@ public class ProductsListViewActivity extends ArrayAdapter<String> {
             tvQuantity = v.findViewById(R.id.tvQuantity);
             ptype = v.findViewById(R.id.ptype);
             delete = v.findViewById(R.id.btnDeleteProducts);
+            if (background.type.equals("0"))
+                delete.setVisibility(View.VISIBLE);
         }
     }
 
@@ -149,6 +154,7 @@ public class ProductsListViewActivity extends ArrayAdapter<String> {
         @Override
         protected void onPreExecute() {
 
+
         }
         @Override
         protected void onPostExecute(String result) {
@@ -158,6 +164,7 @@ public class ProductsListViewActivity extends ArrayAdapter<String> {
             try {
                 if (result.equals("success")) {
                     Intent intent = new Intent(context, ProductsActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     context.startActivity(intent);
                 }
                 else{

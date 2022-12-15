@@ -19,17 +19,17 @@ public class OrderDetailsAdapter extends ArrayAdapter<String> {
 
     private final String[] perigrafi;
     private final String[] price;
-    private final String[] posotita
-            ;
-
+    private final String[] posotita;
+    private final String[] eventID;
     Bitmap bitmap;
-    public OrderDetailsAdapter(Activity context,String[]perigrafi,String[]price, String[] posotita)
+    public OrderDetailsAdapter(Activity context,String[]perigrafi,String[]price, String[] posotita, String[] eventID)
     {
-        super(context, R.layout.order_detail_row);
+        super(context, R.layout.order_detail_row, perigrafi);
         this.context=context;
         this.perigrafi = perigrafi;
         this.price = price;
         this.posotita=posotita;
+        this.eventID=eventID;
 
     }
     @NonNull

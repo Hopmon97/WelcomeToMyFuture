@@ -103,14 +103,14 @@ public class background extends AsyncTask<String,Void,String> {
                 else if (type.equals("1"))
                 {
 
-                    Intent intent = new Intent(context, Geoponos.class);
+                    Intent intent = new Intent(context, Georgosss.class);
                     context.startActivity(intent);
 
                 }
                 else if (type.equals("2"))
                 {
 
-                    Intent intent = new Intent(context, Georgosss.class);
+                    Intent intent = new Intent(context, Geoponos.class);
                     context.startActivity(intent);
 
                 }

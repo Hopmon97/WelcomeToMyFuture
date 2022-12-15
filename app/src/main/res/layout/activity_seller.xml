@@ -112,11 +112,11 @@
                     android:id="@+id/btnUpdate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".5"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:text="update data"
-                    android:onClick="updateData1"/>
+                    android:layout_weight=".5"
+                    android:onClick="updateData"
+                    android:text="update data" />
 
                 <Button
                     android:id="@+id/btnChangePassword"
@@ -125,6 +125,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:layout_weight=".5"
+                    android:onClick="resetPassword"
                     android:text="change password" />
 
             </LinearLayout>
@@ -133,7 +134,7 @@
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation2"
+        android:id="@+id/bottom_navigation5"
         android:layout_width="413dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -141,7 +142,7 @@
         android:background="#CE171516"
         android:foregroundGravity="center"
         app:backgroundTint="@color/white"
-        app:menu="@menu/bottom_navigation2" />
+        app:menu="@menu/bottom_navigation5" />
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation3"
         android:layout_width="413dp"

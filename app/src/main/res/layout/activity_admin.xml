@@ -117,25 +117,31 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:weightSum="1">
+                android:weightSum="2">
 
                 <Button
                     android:id="@+id/btnUpdate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".5"
+                    android:layout_weight="1"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:text="update data"
-                    android:onClick="updateData"/>
+                    android:onClick="updateData"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    />
 
                 <Button
                     android:id="@+id/btnChangePassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
                     android:layout_marginBottom="5dp"
-                    android:layout_weight=".5"
+                    android:layout_weight="1"
+                    android:onClick="resetPassword"
                     android:text="change password" />
 
             </LinearLayout>
@@ -143,7 +149,7 @@
     </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation2"
+        android:id="@+id/bottom_navigation5"
         android:layout_width="413dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -151,7 +157,8 @@
         android:background="#CE171516"
         android:foregroundGravity="center"
         app:backgroundTint="@color/white"
-        app:menu="@menu/bottom_navigation2" />
+        app:menu="@menu/bottom_navigation5" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation3"
         android:layout_width="413dp"
@@ -162,9 +169,10 @@
         android:foregroundGravity="center"
         app:backgroundTint="@color/white"
         app:menu="@menu/bottom_navigation3" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
-        android:layout_width="413dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:visibility="visible"
@@ -172,6 +180,7 @@
         android:foregroundGravity="center"
         app:backgroundTint="@color/white"
         app:menu="@menu/bottom_navigation" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation4"
         android:layout_width="413dp"

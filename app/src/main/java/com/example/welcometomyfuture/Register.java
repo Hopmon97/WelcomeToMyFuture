@@ -2,6 +2,7 @@ package com.example.welcometomyfuture;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -72,7 +73,8 @@ public class Register extends AppCompatActivity {
         {
             Toast.makeText(this,"Password Mismatch", Toast.LENGTH_SHORT).show();
         }
-        else if(name.equals("")&& email.equals("") && password.equals(""))
+        else if(user.equals("")||name.equals("")|| email.equals("") || password.equals("")|| repeatPassword.equals("")||
+                email.equals("")|| address.equals("")|| city.equals("")|| country.equals("")|| postal.equals("")|| phone.equals(""))
         {
             Toast.makeText(this,"Please fill all spaces", Toast.LENGTH_SHORT).show();
 
@@ -182,6 +184,10 @@ public class Register extends AppCompatActivity {
             alertDialog.setTitle("Register Status:");
             alertDialog.setMessage(result);
             alertDialog.show();
+
+            Intent intent = new Intent(Register.this,MainActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         }
@@ -205,4 +211,5 @@ public class Register extends AppCompatActivity {
 
         }
     }
+
 }
